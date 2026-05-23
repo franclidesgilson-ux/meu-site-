@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TechStore</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#222;
+    transition:0.3s;
+}
+
+header{
+    background:#121212;
+    color:white;
+    padding:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:10px;
+    font-weight:bold;
+}
+
+.banner{
+    background:#2563eb;
+    color:white;
+    padding:80px 20px;
+    text-align:center;
+}
+
+.banner h1{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.produtos{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    padding:40px 20px;
+}
+
+.card{
+    background:white;
+    width:250px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card button{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.formulario{
+    padding:40px 20px;
+    max-width:500px;
+    margin:auto;
+}
+
+.formulario h2{
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.formulario input,
+.formulario textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.formulario button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#121212;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+footer{
+    background:#121212;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+#topo{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    padding:15px;
+    border:none;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    display:none;
+}
+
+.dark{
+    background:#121212;
+    color:white;
+}
+
+.dark .card{
+    background:#1e1e1e;
+    color:white;
+}
+
+.dark input,
+.dark textarea{
+    background:#222;
+    color:white;
+    border:1px solid #555;
+}
+
+@media(max-width:768px){
+
+    header{
+        flex-direction:column;
+    }
+
+    .banner h1{
+        font-size:30px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>TechStore</h2>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Produtos</a>
+<a href="#">Contato</a>
+</nav>
+
+<button onclick="modoEscuro()">
+🌙 Dark Mode
+</button>
+
+</header>
+
+<section class="banner">
+
+<h1>Bem-vindo à TechStore</h1>
+
+<p>
+Os melhores produtos tecnológicos do mercado.
+</p>
+
+</section>
+
+<section class="produtos">
+
+<div class="card">
+<h3>Notebook Gamer</h3>
+<p>Alta performance para jogos.</p>
+<button onclick="comprar()">
+Comprar
+</button>
+</div>
+
+<div class="card">
+<h3>Smartphone</h3>
+<p>Câmera profissional e rapidez.</p>
+<button onclick="comprar()">
+Comprar
+</button>
+</div>
+
+<div class="card">
+<h3>Headset</h3>
+<p>Som premium para gamers.</p>
+<button onclick="comprar()">
+Comprar
+</button>
+</div>
+
+</section>
+
+<section class="formulario">
+
+<h2>Contato</h2>
+
+<form id="formulario">
+
+<input type="text" id="nome" placeholder="Seu nome">
+
+<input type="email" id="email" placeholder="Seu email">
+
+<textarea id="mensagem" rows="5" placeholder="Sua mensagem"></textarea>
+
+<button type="submit">
+Enviar
+</button>
+
+</form>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 TechStore - Todos os direitos reservados
+</p>
+
+</footer>
+
+<button id="topo" onclick="voltarTopo()">
+↑
+</button>
+
+<script>
+
+function comprar(){
+    alert("Produto adicionado ao carrinho!");
+}
+
+function modoEscuro(){
+    document.body.classList.toggle("dark");
+}
+
+const formulario = document.getElementById("formulario");
+
+formulario.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let nome = document.getElementById("nome").value;
+    let email = document.getElementById("email").value;
+    let mensagem = document.getElementById("mensagem").value;
+
+    if(nome == "" || email == "" || mensagem == ""){
+
+        alert("Preencha todos os campos!");
+
+    }else{
+
+        alert("Mensagem enviada com sucesso!");
+
+        formulario.reset();
+    }
+
+});
+
+window.onscroll = function(){
+
+    let botao = document.getElementById("topo");
+
+    if(document.documentElement.scrollTop > 200){
+
+        botao.style.display = "block";
+
+    }else{
+
+        botao.style.display = "none";
+    }
+
+}
+
+function voltarTopo(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
